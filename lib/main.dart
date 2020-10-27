@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
 _parseAndDecode(String response) {
   return jsonDecode(response);
 }
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    
       title: 'Dio demo',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: MyHomePage(title: 'NASA PICTURE OF THE DAY'),
