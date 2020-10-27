@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 
 _parseAndDecode(String response) {
   return jsonDecode(response);
@@ -27,7 +28,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-    
       title: 'Dio demo',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: MyHomePage(title: 'NASA PICTURE OF THE DAY'),
@@ -77,6 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+//define
+  GlobalKey previewContainer = new GlobalKey();
+  int originalSize = 800;
+  Image _image;
+
   _getData() {
     dio
         .get<Map<String, dynamic>>(
@@ -102,17 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
     _formatDate(_setMidweekDate(DateTime.now()));
   }
 
-   DateTime _setMidweekDate(DateTime date) {
+  DateTime _setMidweekDate(DateTime date) {
     DateTime d = date
         .subtract(Duration(days: _checkWhetherSaturdaySundayOrWeekday(date)));
     return d;
   }
 
-   int _checkWhetherSaturdaySundayOrWeekday(DateTime data) {
+  int _checkWhetherSaturdaySundayOrWeekday(DateTime data) {
     if (data.weekday == DateTime.saturday) {
       return 1;
     }
-    if (data.weekday == DateTime.sunday){
+    if (data.weekday == DateTime.sunday) {
       return 2;
     }
     return 0;
@@ -130,21 +135,20 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _selectDate(context),
               child: Text('Selecionar a data'),
             ),
-             
-            
             Expanded(
               child: ListView(
                 padding: EdgeInsets.all(10),
                 children: [
-                   Text(
+                  Text(
                     _title ?? 'Título: $_title',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
                   ),
                   SizedBox(
                     height: 10,
                   ),
+                  //Image container here....
                   Container(
-                 height: 300,
+                    height: 300,
                     width: 500,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -153,11 +157,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: FadeInImage.memoryNetwork(
-                              fit: BoxFit.cover,
-                              fadeInDuration: Duration(milliseconds: 2000),
-                              placeholder: kTransparentImage,
-                              image: _url,
-                            ),
+                                fit: BoxFit.cover,
+                                fadeInDuration:
+                                    Duration(milliseconds: 2000),
+                                placeholder: kTransparentImage,
+                                image: _url),
                           )
                         : null,
                   ),
@@ -173,12 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontSize: 23,
                           fontWeight: FontWeight.w800,
                         ),
-                       
                       ),
-
                     ],
-
-                                      
                   ),
                   SizedBox(
                     height: 10,
@@ -186,17 +186,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text(
                     _explanation ?? 'Informação: $_explanation',
                     style: TextStyle(
-                      fontSize: 20,
-                      // fontWeight: FontWeight.w600,
-                      letterSpacing: 0.9
-                    ),
+                        fontSize: 20,
+                        // fontWeight: FontWeight.w600,
+                        letterSpacing: 0.9),
                   ),
-              
                 ],
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ImageDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Container(
+        width: 200,
+        height: 200,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: ExactAssetImage('assets/tamas.jpg'), fit: BoxFit.cover)),
       ),
     );
   }
