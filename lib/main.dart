@@ -130,6 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _selectDate(context),
               child: Text('Selecionar a data'),
             ),
+             
+            
             Expanded(
               child: ListView(
                 padding: EdgeInsets.all(10),
@@ -162,12 +164,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    _copyright ?? 'Autor: $_copyright',
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w800,
-                    ),
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Text(
+                        _copyright ?? 'Autor: $_copyright',
+                        style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w800,
+                        ),
+                       
+                      ),
+
+                    ],
+
+                                      
                   ),
                   SizedBox(
                     height: 10,
@@ -176,7 +187,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     _explanation ?? 'Informação: $_explanation',
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                      // fontWeight: FontWeight.w600,
+                      letterSpacing: 0.9
                     ),
                   ),
               
