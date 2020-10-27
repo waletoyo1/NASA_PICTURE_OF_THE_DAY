@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Dio demo',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: MyHomePage(title: 'NASA PICTURE OF THE DAY'),
