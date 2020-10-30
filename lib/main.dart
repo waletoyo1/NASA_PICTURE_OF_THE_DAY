@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
-
 _parseAndDecode(String response) {
   return jsonDecode(response);
 }
@@ -80,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
 //define
   GlobalKey previewContainer = new GlobalKey();
   int originalSize = 800;
-  Image _image;
 
   _getData() {
     dio
